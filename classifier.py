@@ -1,12 +1,14 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
-
+from pydantic import BaseModel, Field
+from dotenv import load_dotenv
+load_dotenv()
 import pandas as pd
 HIGH_CONFIDENCE_THRESHOLD = 0.8
 LOW_CONFIDENCE_THRESHOLD = 0.5
 df_data = pd.read_csv("eve_crash_classified - eve_crash_classified.csv")
 df_topics = pd.read_csv("topics.csv")
 
-from pydantic import BaseModel, Field
+
 
 class Topic(BaseModel):
     name: str = Field(..., description = "name of the topic")
