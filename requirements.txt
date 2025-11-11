@@ -1,0 +1,7 @@
+langchain
+langchain-google-genai 
+langchain-core
+pandas
+joblib
+pydantic
+dotenv
