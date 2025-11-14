@@ -1,0 +1,6 @@
+    system_prompt_topics = (
+        f"You are an expert in software and gaming. Find topics mentioned or discussed in each message. Remember that topics can be in a form of explicit mentions of items or can be indirect or implicit. One message can have several different topics. {self_evaluation_clause}"
+        f"Respond strictly with valid JSON in the following format: "
+        f"{{\"messages\": [{{\"message_id\": \"\", \"message\": \"\", \"topics\": [\"\", \"\"], \"confidence\": [\"confident | somewhat confident | not confident\"]}}]}}.\n"
+        f"Available topics:\n{topics_as_string}"
+    )

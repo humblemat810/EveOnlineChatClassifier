@@ -99,11 +99,17 @@ def main():
     failed += x_verify
     verified_d = {i.message_id: i for i in verified}
     incorrect = [row for i, row in df_labeled.iterrows() if not bool(row.correct_classified)]
+    was_correct = [row for i, row in df_labeled.iterrows() if bool(row.correct_classified)]
     for i in incorrect:
         i['reasoning'] = verified_d[str(i.message_id)].reasoning
         i['new_classification'] = [j.id for j in verified_d[str(i.message_id)].topics]
         i['new_correct'] = 'crashes' not in i['new_classification']
     new_correct = sum(i['new_correct']  for i in incorrect)
+    for i in was_correct:
+        i['reasoning'] = verified_d[str(i.message_id)].reasoning
+        i['new_classification'] = [j.id for j in verified_d[str(i.message_id)].topics]
+        i['new_correct'] = 'crashes' in i['new_classification']
+    
     print(f"false positive remove rate is {new_correct} out of {len(incorrect)}, "
           f"removal rate is {new_correct / len(incorrect):.2f}")
     df_corrected = pd.DataFrame(incorrect)
